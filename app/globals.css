@@ -11,6 +11,7 @@
   /* Push top wave up & bottom wave down → more room for team contest */
   --wave-spread: 36px;
   --wave-pull: calc(var(--wave-overlap) - var(--wave-spread));
+  --footer-push-down: 48px;
   --green: #58cc02;
   --green-hover: #46a302;
   --green-light: #d7ffb8;
@@ -198,7 +199,7 @@ button {
 }
 
 .site-footer .section-wave-overlap--top {
-  top: calc(-1 * var(--wave-overlap));
+  top: calc(-1 * var(--wave-overlap) + var(--footer-push-down));
 }
 
 /* Wave divider */
