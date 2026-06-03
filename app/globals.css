@@ -1,0 +1,383 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --wave-overlap: 104px;
+  /* Push top wave up & bottom wave down → more room for team contest */
+  --wave-spread: 36px;
+  --wave-pull: calc(var(--wave-overlap) - var(--wave-spread));
+  --green: #58cc02;
+  --green-hover: #46a302;
+  --green-light: #d7ffb8;
+  --red: #ff4b4b;
+  --blue: #1cb0f6;
+  --yellow: #ffc800;
+  --text: #3c3c3c;
+  --footer-bg: #235390;
+  --white: #ffffff;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --radius: 20px;
+  --font: var(--font-nunito), "Nunito", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .phones-carousel__item {
+    transition: none !important;
+  }
+
+  .testimonials__track {
+    transition: none !important;
+  }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Buttons */
+.btn-green {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: var(--green);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  box-shadow: 0 4px 0 #58a700;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn-green:hover {
+  background: var(--green-hover);
+  transform: scale(1.04);
+}
+
+.btn-green:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 0 #58a700;
+}
+
+.btn-green--large {
+  padding: 18px 40px;
+  font-size: 16px;
+}
+
+.btn-outline-green {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--green);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 15px;
+  border-radius: 999px;
+  border: 3px solid var(--green-hover);
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn-outline-green:hover {
+  background: var(--green-hover);
+  transform: scale(1.04);
+}
+
+/* Highlighted word */
+.highlight {
+  color: var(--green);
+  position: relative;
+  display: inline-block;
+}
+
+.highlight::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q25 0 50 4 T100 4' fill='none' stroke='%2358CC02' stroke-width='3'/%3E%3C/svg%3E")
+    repeat-x;
+  background-size: 100% 100%;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Overlapping wavy edges (free lesson / testimonials ↔ team contest) */
+.section-wave-overlap {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  width: 100vw;
+  max-width: none;
+  transform: translateX(-50%);
+  line-height: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.section-wave-overlap svg {
+  display: block;
+  width: 100%;
+  min-width: 100%;
+  height: var(--wave-overlap);
+}
+
+/* Bottom = same wave as testimonials top, rotated 180° */
+.section-wave-overlap__svg--flip {
+  transform: rotate(180deg);
+  transform-origin: center;
+}
+
+.section-wave-overlap--bottom {
+  bottom: calc(-1 * var(--wave-pull));
+}
+
+.section-wave-overlap--top {
+  top: calc(-1 * var(--wave-pull));
+}
+
+.testimonials .section-wave-overlap--top {
+  z-index: 3;
+}
+
+.site-footer .section-wave-overlap--top {
+  top: calc(-1 * var(--wave-overlap));
+}
+
+/* Wave divider */
+.wave-divider {
+  display: block;
+  width: 100%;
+  height: auto;
+  line-height: 0;
+  margin-bottom: -1px;
+}
+
+.wave-divider svg {
+  width: 100%;
+  height: 48px;
+}
+
+@media (min-width: 768px) {
+  .wave-divider svg {
+    height: 72px;
+  }
+}
+
+/* Phone screens (provided assets include device frame) */
+.phone-screen-image {
+  flex-shrink: 0;
+  line-height: 0;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));
+}
+
+.phone-screen-image__img {
+  width: auto;
+  height: auto;
+  max-width: 180px;
+  display: block;
+}
+
+.phone-screen-image--large .phone-screen-image__img {
+  max-width: 260px;
+}
+
+/* Section layout */
+.section {
+  position: relative;
+  padding: 48px 20px;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .section {
+    padding: 72px 40px;
+  }
+
+  .section-grid {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .section-grid--reverse {
+    flex-direction: row-reverse;
+  }
+
+  .section-grid__content {
+    flex: 1;
+    max-width: 480px;
+  }
+
+  .section-grid__visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.section-body {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #777;
+  margin-bottom: 24px;
+}
+
+/* Feature list */
+.feature-list {
+  list-style: none;
+  margin-bottom: 28px;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.feature-list__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+
+/* Empty slots for your images/SVGs — hide until you add assets */
+.asset-slot {
+  display: block;
+  background: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.asset-slot:empty {
+  min-width: 1px;
+  min-height: 1px;
+}
+
+.duolingo-logo__icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* Pagination dots */
+.pagination-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 24px 0 8px;
+}
+
+.pagination-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.pagination-dots span.active {
+  background: var(--white);
+  transform: scale(1.3);
+  width: 12px;
+  height: 12px;
+}
+
+/* NEW badge */
+.badge-new {
+  display: inline-block;
+  background: var(--green);
+  color: var(--white);
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.05em;
+}
