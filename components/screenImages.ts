@@ -1,33 +1,56 @@
 import type { StaticImageData } from "next/image";
-import phoneTopics from "@/public/images/screens/phone-topics.png";
-import phoneTranslate from "@/public/images/screens/phone-translate.png";
-import phoneXp from "@/public/images/screens/phone-xp.png";
 import phoneCharacterEditor from "@/public/images/screens/phone-character-editor.png";
 import phoneTeamStandings from "@/public/images/screens/phone-team-standings.png";
 
 export type ScreenAsset = {
-  src: StaticImageData;
-  /** Extra height when PNG has more letterbox (e.g. phone-topics) */
+  /** Direct public URL — no build-time image processing */
+  src: StaticImageData | string;
+  width: number;
+  height: number;
   displayHeightSide?: number;
   displayHeightCenter?: number;
 };
 
 export const screens = {
   topics: {
-    src: phoneTopics,
-    displayHeightSide: 310,
-    displayHeightCenter: 350,
+    src: "/images/screens/phone-topics.png",
+    width: 671,
+    height: 1024,
+    displayHeightSide: 420,
+    displayHeightCenter: 500,
   },
   translate: {
-    src: phoneTranslate,
-    displayHeightSide: 280,
-    displayHeightCenter: 320,
+    src: "/images/screens/phone-translate.png",
+    width: 671,
+    height: 1024,
+    displayHeightSide: 420,
+    displayHeightCenter: 500,
   },
   xp: {
-    src: phoneXp,
-    displayHeightSide: 280,
-    displayHeightCenter: 320,
+    src: "/images/screens/phone-xp.png",
+    width: 671,
+    height: 1024,
+    displayHeightSide: 420,
+    displayHeightCenter: 500,
   },
-  characterEditor: { src: phoneCharacterEditor },
-  teamStandings: { src: phoneTeamStandings },
+  characterEditor: {
+    src: phoneCharacterEditor,
+    width: phoneCharacterEditor.width,
+    height: phoneCharacterEditor.height,
+  },
+  teamStandings: {
+    src: phoneTeamStandings,
+    width: phoneTeamStandings.width,
+    height: phoneTeamStandings.height,
+  },
+  teamRed: {
+    src: "/images/screens/phone-team-red.png",
+    width: 635,
+    height: 968,
+  },
+  teamBlue: {
+    src: "/images/screens/phone-team-blue.png",
+    width: 635,
+    height: 968,
+  },
 } as const satisfies Record<string, ScreenAsset>;

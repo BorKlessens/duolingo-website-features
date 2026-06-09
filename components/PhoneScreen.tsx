@@ -1,35 +1,38 @@
-import Image, { type StaticImageData } from "next/image";
+import type { StaticImageData } from "next/image";
 
 interface PhoneScreenProps {
-  src: StaticImageData;
+  src: StaticImageData | string;
+  width: number;
+  height: number;
   alt: string;
   className?: string;
   size?: "default" | "large";
   /** Fixed display height (px) — evens out screens with extra padding in the PNG */
   displayHeight?: number;
-  priority?: boolean;
 }
 
 export function PhoneScreen({
   src,
+  width,
+  height,
   alt,
   className = "",
   size = "default",
   displayHeight,
-  priority,
 }: PhoneScreenProps) {
+  const imgSrc = typeof src === "string" ? src : src.src;
+
   return (
     <div
       className={`phone-screen-image phone-screen-image--${size} ${className}`.trim()}
     >
-      <Image
-        src={src}
+      <img
+        src={imgSrc}
         alt={alt}
-        width={src.width}
-        height={src.height}
+        width={width}
+        height={height}
         className="phone-screen-image__img"
-        priority={priority}
-        sizes={size === "large" ? "(max-width: 900px) 220px, 280px" : "(max-width: 900px) 160px, 200px"}
+        decoding="async"
         style={
           displayHeight
             ? { height: displayHeight, width: "auto", maxWidth: "none" }

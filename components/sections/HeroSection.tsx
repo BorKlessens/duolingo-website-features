@@ -1,6 +1,5 @@
 "use client";
 
-import { AssetSlot } from "../AssetSlot";
 import { DuolingoLogo } from "../DuolingoLogo";
 import { PhoneScreen } from "../PhoneScreen";
 import { screens } from "../screenImages";
@@ -27,22 +26,43 @@ export function HeroSection() {
         </div>
 
         <div className="hero__visual-wrap">
-          <AssetSlot name="hero-character-left" className="hero__character-side" />
+          <img
+            src="/images/characters/bea.png"
+            alt=""
+            className="hero__character-side hero__character-side--left float-soft"
+            aria-hidden="true"
+          />
           <PhoneScreen
             src={screens.topics.src}
+            width={screens.topics.width}
+            height={screens.topics.height}
             alt="Duolingo app — kies een onderwerp"
             size="large"
             className="hero__phone"
             displayHeight={400}
-            priority
           />
-          <AssetSlot name="hero-character-right" className="hero__character-side" />
+          <img
+            src="/images/characters/junior.png"
+            alt=""
+            className="hero__character-side hero__character-side--right float-soft float-soft--delay"
+            aria-hidden="true"
+          />
         </div>
       </div>
 
       <div className="hero__decor">
-        <AssetSlot name="hero-characters-group" className="hero__characters-group" />
-        <AssetSlot name="hero-owl" className="hero__decor-owl" />
+        <img
+          src="/images/characters/fallstaff.png"
+          alt=""
+          className="hero__decor-character float-soft"
+          aria-hidden="true"
+        />
+        <img
+          src="/images/characters/duo.png"
+          alt=""
+          className="hero__decor-owl float-soft float-soft--delay"
+          aria-hidden="true"
+        />
       </div>
 
       <div className="pagination-dots" aria-label="Hero slides">

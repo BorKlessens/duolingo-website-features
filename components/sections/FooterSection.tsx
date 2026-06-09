@@ -43,7 +43,18 @@ const BADGE_LABELS: Record<"plus" | "nieuw", string> = {
 export function FooterSection() {
   return (
     <footer className="site-footer" id="download">
-      <SectionWaveOverlap position="top" variant="footer" fill="#58CC02" />
+      <SectionWaveOverlap
+        position="top"
+        variant="download"
+        fill="#89e219"
+        className="site-footer__wave site-footer__wave--back"
+      />
+      <SectionWaveOverlap
+        position="top"
+        variant="footer"
+        fill="#58CC02"
+        className="site-footer__wave site-footer__wave--front"
+      />
 
       <h2 className="site-footer__headline">Klaar om te beginnen?</h2>
 

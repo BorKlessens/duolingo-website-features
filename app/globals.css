@@ -11,7 +11,7 @@
   /* Push top wave up & bottom wave down → more room for team contest */
   --wave-spread: 36px;
   --wave-pull: calc(var(--wave-overlap) - var(--wave-spread));
-  --footer-push-down: 48px;
+  --footer-push-down: 96px;
   --green: #58cc02;
   --green-hover: #46a302;
   --green-light: #d7ffb8;
@@ -38,6 +38,32 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Gentle floating animation for decorative characters */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-soft {
+  animation: float-soft 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-soft--delay {
+  animation-delay: 1.1s;
+  animation-duration: 5.2s;
+}
+
+.float-soft--slow {
+  animation-delay: 0.5s;
+  animation-duration: 6s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -54,6 +80,10 @@ body {
 
   .testimonials__track {
     transition: none !important;
+  }
+
+  .float-soft {
+    animation: none !important;
   }
 }
 
@@ -202,6 +232,21 @@ button {
   top: calc(-1 * var(--wave-overlap) + var(--footer-push-down));
 }
 
+/* Layered two-tone wave transition into the footer */
+.site-footer .site-footer__wave--front {
+  z-index: 1;
+}
+
+.site-footer .site-footer__wave--back {
+  top: calc(-1 * var(--wave-overlap) + var(--footer-push-down) - 30px);
+  z-index: 0;
+}
+
+.site-footer__wave svg {
+  height: calc(var(--wave-overlap) + 40px);
+  filter: drop-shadow(0 -6px 14px rgba(88, 204, 2, 0.18));
+}
+
 /* Wave divider */
 .wave-divider {
   display: block;
@@ -226,6 +271,7 @@ button {
 .phone-screen-image {
   flex-shrink: 0;
   line-height: 0;
+  background: none;
   filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));
 }
 
@@ -322,8 +368,19 @@ button {
 
 .feature-list__icon {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  box-shadow: 0 2px 4px rgba(88, 204, 2, 0.35);
+}
+
+.feature-list__icon svg {
+  display: block;
 }
 
 /* Empty slots for your images/SVGs — hide until you add assets */

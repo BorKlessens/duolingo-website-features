@@ -1,9 +1,25 @@
 "use client";
 
-import { AssetSlot } from "../AssetSlot";
 import { PhoneScreen } from "../PhoneScreen";
 import { screens } from "../screenImages";
 import { useScrollReveal } from "../useScrollReveal";
+
+function CheckIcon() {
+  return (
+    <span className="feature-list__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="16" height="16">
+        <path
+          fill="none"
+          stroke="#fff"
+          strokeWidth="3.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M5 12.5l4.5 4.5L19 7"
+        />
+      </svg>
+    </span>
+  );
+}
 
 export function CharacterBuilderSection() {
   const reveal = useScrollReveal();
@@ -15,9 +31,11 @@ export function CharacterBuilderSection() {
           <div className="section-grid__visual">
             <PhoneScreen
               src={screens.characterEditor.src}
+              width={screens.characterEditor.width}
+              height={screens.characterEditor.height}
               alt="Duolingo karakter editor"
               size="large"
-              displayHeight={480}
+              displayHeight={580}
               className="character-builder__screen"
             />
           </div>
@@ -33,23 +51,23 @@ export function CharacterBuilderSection() {
             </p>
             <ul className="feature-list">
               <li>
-                <AssetSlot name="checkmark-icon" className="feature-list__icon" />
+                <CheckIcon />
                 Verdien 50 XP bij het aanmaken van jouw karakter!
               </li>
               <li>
-                <AssetSlot name="checkmark-icon" className="feature-list__icon" />
+                <CheckIcon />
                 Volledig aanpasbaar: hoofd, outfit, armen, benen en accessoires
               </li>
               <li>
-                <AssetSlot name="checkmark-icon" className="feature-list__icon" />
+                <CheckIcon />
                 Verdien XP met jouw karakter om beloningen te ontvangen!
               </li>
               <li>
-                <AssetSlot name="checkmark-icon" className="feature-list__icon" />
+                <CheckIcon />
                 Deel jouw karakter op social media om leuke prijzen te winnen!
               </li>
             </ul>
-            <button type="button" className="btn-green btn-green--large">
+            <button type="button" className="btn-green">
               Maak jouw karakter
             </button>
           </div>

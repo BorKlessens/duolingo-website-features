@@ -5,9 +5,9 @@ import { PhoneScreen } from "./PhoneScreen";
 import { screens, type ScreenAsset } from "./screenImages";
 
 const LESSON_PHONES: { key: keyof typeof screens; alt: string }[] = [
-  { key: "translate", alt: "Duolingo — vertaal deze zin" },
-  { key: "xp", alt: "Duolingo — +10 XP" },
   { key: "topics", alt: "Duolingo — kies een onderwerp" },
+  { key: "translate", alt: "Duolingo — vertaal deze zin" },
+  { key: "xp", alt: "Duolingo — streak en voortgang" },
 ];
 
 const ROTATE_MS = 4000;
@@ -30,7 +30,7 @@ function getDisplayHeight(
 }
 
 export function PhonesCarousel() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -52,6 +52,8 @@ export function PhonesCarousel() {
           <PhoneScreen
             key={phone.key}
             src={screen.src}
+            width={screen.width}
+            height={screen.height}
             alt={phone.alt}
             displayHeight={getDisplayHeight(screen, position)}
             className={`phones-carousel__item phones-carousel__item--${position}`}
