@@ -11,7 +11,6 @@
   /* Push top wave up & bottom wave down → more room for team contest */
   --wave-spread: 36px;
   --wave-pull: calc(var(--wave-overlap) - var(--wave-spread));
-  --footer-push-down: 96px;
   --green: #58cc02;
   --green-hover: #46a302;
   --green-light: #d7ffb8;
@@ -19,11 +18,28 @@
   --blue: #1cb0f6;
   --yellow: #ffc800;
   --text: #3c3c3c;
-  --footer-bg: #235390;
+  --footer-bg: #46a302;
   --white: #ffffff;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   --radius: 20px;
   --font: var(--font-nunito), "Nunito", sans-serif;
+  /* Spacing scale (8px base) */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-section-x: 24px;
+  --space-section-y: 80px;
+  --container-max: 1120px;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --space-section-x: 40px;
+    --space-section-y: 96px;
+  }
 }
 
 html {
@@ -74,11 +90,8 @@ body {
     transform: none;
   }
 
-  .phones-carousel__item {
-    transition: none !important;
-  }
-
-  .testimonials__track {
+  .phones-carousel__item,
+  .lesson-phones-carousel__item {
     transition: none !important;
   }
 
@@ -106,7 +119,8 @@ button {
 }
 
 /* Buttons */
-.btn-green {
+.btn-green,
+.feature-mockup-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -121,14 +135,17 @@ button {
   border-radius: 999px;
   box-shadow: 0 4px 0 #58a700;
   transition: transform 0.15s ease, background 0.15s ease;
+  text-decoration: none;
 }
 
-.btn-green:hover {
+.btn-green:hover,
+.feature-mockup-link:hover {
   background: var(--green-hover);
   transform: scale(1.04);
 }
 
-.btn-green:active {
+.btn-green:active,
+.feature-mockup-link:active {
   transform: scale(0.98);
   box-shadow: 0 2px 0 #58a700;
 }
@@ -190,7 +207,7 @@ button {
   transform: translateY(0);
 }
 
-/* Overlapping wavy edges (free lesson / testimonials ↔ team contest) */
+/* Overlapping wavy edges between sections */
 .section-wave-overlap {
   position: absolute;
   left: 50%;
@@ -210,7 +227,7 @@ button {
   height: var(--wave-overlap);
 }
 
-/* Bottom = same wave as testimonials top, rotated 180° */
+/* Bottom wave, rotated 180° */
 .section-wave-overlap__svg--flip {
   transform: rotate(180deg);
   transform-origin: center;
@@ -222,29 +239,6 @@ button {
 
 .section-wave-overlap--top {
   top: calc(-1 * var(--wave-pull));
-}
-
-.testimonials .section-wave-overlap--top {
-  z-index: 3;
-}
-
-.site-footer .section-wave-overlap--top {
-  top: calc(-1 * var(--wave-overlap) + var(--footer-push-down));
-}
-
-/* Layered two-tone wave transition into the footer */
-.site-footer .site-footer__wave--front {
-  z-index: 1;
-}
-
-.site-footer .site-footer__wave--back {
-  top: calc(-1 * var(--wave-overlap) + var(--footer-push-down) - 30px);
-  z-index: 0;
-}
-
-.site-footer__wave svg {
-  height: calc(var(--wave-overlap) + 40px);
-  filter: drop-shadow(0 -6px 14px rgba(88, 204, 2, 0.18));
 }
 
 /* Wave divider */

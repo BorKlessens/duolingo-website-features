@@ -1,106 +1,61 @@
 "use client";
 
-import { PhonesCarousel } from "../PhonesCarousel";
+import { FEATURE_MOCKUPS, SECTION_COLORS } from "../featureLinks";
+import { FeatureMockupLink } from "../FeatureMockupLink";
+import { LessonPhonesCarousel } from "../LessonPhonesCarousel";
 import { SectionWaveOverlap } from "../SectionWaveOverlap";
 import { useScrollReveal } from "../useScrollReveal";
 
-function CheckIcon() {
+function FeatureTitle() {
+  const feature = FEATURE_MOCKUPS.miniLesson;
   return (
-    <span className="feature-list__icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="16" height="16">
-        <path
-          fill="none"
-          stroke="#fff"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M5 12.5l4.5 4.5L19 7"
-        />
-      </svg>
-    </span>
+    <>
+      {feature.titleBefore}
+      <span className="highlight">{feature.titleHighlight}</span>
+      {feature.titleAfter}
+    </>
   );
 }
 
 export function FreeLessonSection() {
   const reveal = useScrollReveal();
+  const feature = FEATURE_MOCKUPS.miniLesson;
 
   return (
-    <section className="free-lesson section" id="free-lesson">
+    <section className="feature-panel feature-panel--lesson section" id={feature.id}>
+      <SectionWaveOverlap
+        position="top"
+        fill={SECTION_COLORS.character}
+        variant="lesson"
+        flip
+      />
+
       <div className="section-inner">
         <div
           ref={reveal.ref}
-          className={`section-grid section-grid--reverse ${reveal.className}`}
+          className={`feature-panel__grid feature-panel__grid--content-first ${reveal.className}`}
         >
-          <div className="section-grid__visual free-lesson__stage">
-            <img
-              src="/images/characters/travel.png"
-              alt=""
-              className="free-lesson__owl free-lesson__owl--travel float-soft"
-              aria-hidden="true"
-            />
-            <img
-              src="/images/characters/owl-fly.png"
-              alt=""
-              className="free-lesson__owl free-lesson__owl--left float-soft float-soft--delay"
-              aria-hidden="true"
-            />
-
-            <PhonesCarousel />
-
-            <img
-              src="/images/characters/owl-fly.png"
-              alt=""
-              className="free-lesson__owl free-lesson__owl--top float-soft"
-              aria-hidden="true"
-            />
-            <img
-              src="/images/characters/owl-fly.png"
-              alt=""
-              className="free-lesson__owl free-lesson__owl--right float-soft float-soft--slow"
-              aria-hidden="true"
-            />
-            <img
-              src="/images/characters/hand.png"
-              alt=""
-              className="free-lesson__hand"
-              aria-hidden="true"
-            />
+          <div className="feature-panel__content">
+            <h2 className="feature-panel__title">
+              <FeatureTitle />
+            </h2>
+            <p className="feature-panel__body">{feature.description}</p>
+            <FeatureMockupLink href={feature.mockupUrl}>
+              {feature.cta} →
+            </FeatureMockupLink>
           </div>
 
-          <div className="section-grid__content">
-            <h2 className="section-title">
-              Probeer <span className="highlight">gratis</span> korte les binnen
-              1 min
-            </h2>
-            <p className="section-body">
-              Speel hieronder een korte proefles van 1 minuut en ontdek of
-              Duolingo iets voor jou is — verdien meteen +50 XP!
-            </p>
-            <ul className="feature-list">
-              <li>
-                <CheckIcon />
-                Verdien +50 XP bij het voltooien van een les!
-              </li>
-              <li>
-                <CheckIcon />
-                Probeer volledig gratis!
-              </li>
-              <li>
-                <CheckIcon />
-                Binnen 1 min!
-              </li>
-              <li>
-                <CheckIcon />
-                Kies je eigen topic!
-              </li>
-            </ul>
-            <button type="button" className="btn-green">
-              Speel nu! →
-            </button>
+          <div className="feature-panel__preview feature-panel__preview--lesson">
+            <LessonPhonesCarousel />
           </div>
         </div>
       </div>
-      <SectionWaveOverlap position="bottom" variant="lesson" fill="#D7FFB8" />
+
+      <SectionWaveOverlap
+        position="bottom"
+        fill={SECTION_COLORS.contest}
+        variant="testimonials"
+      />
     </section>
   );
 }
